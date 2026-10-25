@@ -103,7 +103,7 @@
     this.track = el('g', { 'class': 'track', opacity: 0 }, g);
     WALLS.forEach(function (w) { line([w.a[0], w.a[1], H], [w.b[0], w.b[1], H], { stroke: COL.glassS, 'stroke-width': 1, 'stroke-dasharray': '2 3' }, self.track); });
     this.fireTag = el('text', { x: P(8.3, 3, 2.6)[0].toFixed(0), y: P(8.3, 3, 2.6)[1].toFixed(0), fill: COL.fireS, opacity: 0 }, g);
-    this.fireTag.textContent = T('iso.fire', 'Classement EI : à compléter');
+    this.fireTag.textContent = T('iso.fire', 'Classement EI : à compléter');
     this.renderPanes();
   };
   IsoRoom.prototype.renderPanes = function () {

@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Demande de devis · Swiss Cloisons Solutions</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Demandez un devis gratuit pour vos cloisons, faux-plafonds et faux-planchers.">
 <meta property="og:title" content="Demande de devis · Swiss Cloisons Solutions">
-<meta property="og:image" content="assets/img/partage.jpg">
+<meta property="og:image" content="https://swiss-cloisons-solutions-maquette.vercel.app/assets/img/partage.jpg">
+<meta property="og:url" content="https://swiss-cloisons-solutions-maquette.vercel.app/devis">
 <meta name="theme-color" content="#F3F2EE">
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/instrument-sans-var.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="preload" href="assets/fonts/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=2">
 <script>(function(){var d=document.documentElement;d.classList.add('js');var c=false,l='fr';try{c=localStorage.getItem('scs-calm')==='1';l=localStorage.getItem('scs-lang')||'fr'}catch(e){}if(c||matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('calm');if(l==='en'){d.lang='en';d.classList.add('lang-en')}})();</script>
 </head>
 <body data-page="devis">
@@ -25,7 +25,7 @@
   <div class="hd__in">
     <a class="hd__logo" href="index.html" aria-label="Swiss Cloisons Solutions, accueil">
       <svg class="mark" viewBox="-40 -40 1250 1530" aria-hidden="true"><path d="M135 1430H10V600L585 95l575 505v840L487 840V0"/></svg>
-      <span class="hd__name"><b>Swiss Cloisons</b><b>Solutions</b></span>
+      <span class="hd__name"><b>Swiss Cloisons</b> <b>Solutions</b></span>
     </a>
     <nav class="hd__nav" aria-label="Navigation principale">
       <a class="link-trace" href="index.html#metiers" data-i18n="nav.metiers">Métiers</a>
@@ -34,9 +34,9 @@
       <a class="link-trace" href="index.html#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="hd__tools">
-      <span class="hd__tel tnum">+41 22 559 44 22</span>
+      <a class="hd__tel tnum tel-link" href="tel:+41225594422">+41 22 559 44 22</a>
       <button class="tool" type="button" data-sound aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="tool.son">Son</span></button>
-      <button class="tool" type="button" data-lang aria-label="English version">EN</button>
+      <button class="tool" type="button" data-lang aria-label="EN, English version">EN</button>
       <button class="tool hd__burger" type="button" aria-expanded="false" aria-controls="menu" data-burger><span data-i18n="tool.menu">Menu</span></button>
     </div>
   </div>
@@ -51,10 +51,10 @@
   </nav>
   <div class="menu__tools">
     <button class="tool" type="button" data-sound aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="tool.son">Son</span></button>
-    <button class="tool" type="button" data-lang aria-label="English version">EN</button>
+    <button class="tool" type="button" data-lang aria-label="EN, English version">EN</button>
     <button class="tool" type="button" data-calm aria-pressed="false" data-i18n="tool.calm">Réduire les animations</button>
   </div>
-  <div class="menu__info"><span class="tnum">+41 22 559 44 22</span><span>kr@swiss-cloisons-solutions.com</span></div>
+  <div class="menu__info"><a class="tnum tel-link" href="tel:+41225594422">+41 22 559 44 22</a><a class="tel-link" href="mailto:kr@swiss-cloisons-solutions.com">kr@swiss-cloisons-solutions.com</a></div>
 </div>
 
 <main id="contenu">
@@ -74,7 +74,7 @@
 
 <div class="wrap devis">
   <div>
-    <p class="demo-note" role="note"><span class="todo" data-i18n="dv.demo">démonstration</span><span data-i18n="dv.demotxt">Ce formulaire est une maquette : rien n'est envoyé. Sur le site final, la demande arrivera à kr@swiss-cloisons-solutions.com.</span></p>
+    <p class="demo-note" role="note"><span class="todo" data-i18n="dv.demo">démonstration</span><span data-i18n="dv.demotxt">Ce formulaire est une maquette&nbsp;: rien n’est envoyé. Sur le site final, la demande arrivera à kr@swiss-cloisons-solutions.com.</span></p>
     <p class="demo-note" role="status" data-draft hidden style="margin-top:10px"><span data-i18n="dv.brouillon">Brouillon retrouvé sur cet appareil.</span> <button class="copy" type="button" data-draft-clear data-i18n="dv.effacer">Effacer</button></p>
     <ol class="etapes" aria-label="Étapes du formulaire" style="margin-top:28px">
       <li class="is-current"><button type="button" data-goto="0" disabled><span data-i18n="dv.s1">Travaux</span></button></li>
@@ -86,7 +86,7 @@
 
     <form id="devis-form" novalidate>
       <fieldset class="form-step" data-step="1">
-        <legend><span class="mono" style="color:var(--vert)">01 / 05</span><span class="h3" data-i18n="dv.q1">Quels travaux souhaitez-vous ?</span></legend>
+        <legend><span class="mono" style="color:var(--vert)">01 / 05</span><span class="h3" data-i18n="dv.q1">Quels travaux souhaitez-vous&nbsp;?</span></legend>
         <div class="q">
           <span class="q__hint" id="travaux-hint" data-i18n="dv.q1h">Plusieurs choix possibles.</span>
           <div class="tiles" role="group" aria-describedby="travaux-hint travaux-err">
@@ -151,7 +151,7 @@
           </div>
         </div>
         <div class="q">
-          <span class="q__lab" id="lab-occ" data-i18n="dv.occupes">Les locaux seront-ils occupés pendant les travaux ?</span>
+          <span class="q__lab" id="lab-occ" data-i18n="dv.occupes">Les locaux seront-ils occupés pendant les travaux&nbsp;?</span>
           <div class="chips chips--form" role="radiogroup" aria-labelledby="lab-occ">
             <label class="chip"><input type="radio" name="occupes" value="Oui"><span data-i18n="dv.oui">Oui</span></label>
             <label class="chip"><input type="radio" name="occupes" value="Non" checked><span data-i18n="dv.non">Non</span></label>
@@ -161,7 +161,7 @@
       </fieldset>
 
       <fieldset class="form-step" data-step="3" hidden>
-        <legend><span class="mono" style="color:var(--vert)">03 / 05</span><span class="h3" data-i18n="dv.q3">Où et quand ?</span></legend>
+        <legend><span class="mono" style="color:var(--vert)">03 / 05</span><span class="h3" data-i18n="dv.q3">Où et quand&nbsp;?</span></legend>
         <div class="fields">
           <div class="field">
             <label for="lieu" data-i18n="dv.lieu">Lieu des travaux</label>
@@ -196,14 +196,14 @@
       <fieldset class="form-step" data-step="4" hidden>
         <legend><span class="mono" style="color:var(--vert)">04 / 05</span><span class="h3" data-i18n="dv.q4">Vos coordonnées</span></legend>
         <div class="fields">
-          <div class="field full"><label for="entreprise"><span data-i18n="dv.entreprise">Nom de l'entreprise</span> *</label><input id="entreprise" name="entreprise" type="text" autocomplete="organization" required aria-describedby="entreprise-err"><span class="err" id="entreprise-err" aria-live="polite"></span></div>
+          <div class="field full"><label for="entreprise"><span data-i18n="dv.entreprise">Nom de l’entreprise</span> *</label><input id="entreprise" name="entreprise" type="text" autocomplete="organization" required aria-describedby="entreprise-err"><span class="err" id="entreprise-err" aria-live="polite"></span></div>
           <div class="field"><label for="prenom"><span data-i18n="dv.prenom">Prénom</span> *</label><input id="prenom" name="prenom" type="text" autocomplete="given-name" required aria-describedby="prenom-err"><span class="err" id="prenom-err" aria-live="polite"></span></div>
           <div class="field"><label for="nom"><span data-i18n="dv.nom">Nom</span> *</label><input id="nom" name="nom" type="text" autocomplete="family-name" required aria-describedby="nom-err"><span class="err" id="nom-err" aria-live="polite"></span></div>
           <div class="field"><label for="email"><span>E-mail</span> *</label><input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-err"><span class="err" id="email-err" aria-live="polite"></span></div>
           <div class="field"><label for="tel"><span data-i18n="dv.tel">Téléphone</span> *</label><div class="tel-row"><select id="indicatif" name="indicatif" aria-label="Indicatif"><option value="+41">CH +41</option><option value="+33">FR +33</option></select><input id="tel" name="tel" type="tel" autocomplete="tel-national" required aria-describedby="tel-err"></div><span class="err" id="tel-err" aria-live="polite"></span></div>
           <div class="field full"><label for="objet"><span data-i18n="dv.objet">Objet de votre demande</span> *</label><input id="objet" name="objet" type="text" required aria-describedby="objet-err"><span class="err" id="objet-err" aria-live="polite"></span></div>
-          <div class="field full"><label for="message"><span data-i18n="dv.message">Que pouvons-nous faire pour vous ?</span> *</label><textarea id="message" name="message" required aria-describedby="message-err"></textarea><span class="err" id="message-err" aria-live="polite"></span></div>
-          <div class="full"><label class="check"><input type="checkbox" id="consent" name="consent" required aria-describedby="consent-err"><span data-i18n="dv.consent">J'accepte que mes données servent uniquement au traitement de ma demande, comme décrit dans la <a class="link" href="mentions-legales.html#donnees">politique de confidentialité</a>.</span></label><span class="err" id="consent-err" aria-live="polite"></span></div>
+          <div class="field full"><label for="message"><span data-i18n="dv.message">Que pouvons-nous faire pour vous&nbsp;?</span> *</label><textarea data-lenis-prevent id="message" name="message" required aria-describedby="message-err"></textarea><span class="err" id="message-err" aria-live="polite"></span></div>
+          <div class="full"><label class="check"><input type="checkbox" id="consent" name="consent" required aria-describedby="consent-err"><span data-i18n="dv.consent">J’accepte que mes données servent uniquement au traitement de ma demande, comme décrit dans la <a class="link" href="mentions-legales.html#donnees">politique de confidentialité</a>.</span></label><span class="err" id="consent-err" aria-live="polite"></span></div>
         </div>
       </fieldset>
 
@@ -223,8 +223,8 @@
     <div class="ok" data-ok hidden tabindex="-1">
       <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 32l16 16 32-32"/></svg>
       <h2 class="h3" data-ok-title>Merci.</h2>
-      <p class="prose" data-i18n="dv.oktxt">Démonstration terminée : votre demande n'a pas été envoyée. Sur le site final, elle sera transmise à Swiss Cloisons Solutions, qui revient vers vous dans les plus brefs délais.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn btn--ghost" type="button" data-restart data-i18n="dv.nouvelle">Nouvelle demande</button><a class="btn" href="index.html" data-i18n="dv.retour">Retour à l'accueil</a></div>
+      <p class="prose" data-i18n="dv.oktxt">Démonstration terminée&nbsp;: votre demande n’a pas été envoyée. Sur le site final, elle sera transmise à Swiss Cloisons Solutions, qui revient vers vous dans les plus brefs délais.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn btn--ghost" type="button" data-restart data-i18n="dv.nouvelle">Nouvelle demande</button><a class="btn" href="index.html" data-i18n="dv.retour">Retour à l’accueil</a></div>
     </div>
   </div>
 
@@ -235,7 +235,7 @@
       <p class="apercu__sum" data-sum aria-live="polite"></p>
     </div>
     <div class="contact-box">
-      <span class="mono" style="color:var(--texte-3);text-transform:uppercase;letter-spacing:.06em" data-i18n="dv.direct">Vous préférez nous appeler ?</span>
+      <span class="mono" style="color:var(--texte-3);text-transform:uppercase;letter-spacing:.06em" data-i18n="dv.direct">Vous préférez nous appeler&nbsp;?</span>
       <div class="row"><b class="tnum">+41 22 559 44 22</b><button class="copy" type="button" data-copy="+41 22 559 44 22" data-i18n="copy">Copier</button></div>
       <div class="row"><b>kr@swiss-cloisons-solutions.com</b><button class="copy" type="button" data-copy="kr@swiss-cloisons-solutions.com" data-i18n="copy">Copier</button></div>
       <span style="color:var(--texte-2)">Route des Jeunes 25, 1227 Carouge, Genève</span>
@@ -254,12 +254,12 @@
       </div>
       <div>
         <h2 data-i18n="ft.contact">Contact</h2>
-        <ul><li class="ft__sel tnum">+41 22 559 44 22</li><li class="ft__sel">kr@swiss-cloisons-solutions.com</li><li><a class="link-trace" href="https://www.linkedin.com/company/swiss-cloisons-solutions/" rel="noopener" target="_blank">LinkedIn</a></li></ul>
+        <ul><li class="ft__sel tnum"><a class="tel-link" href="tel:+41225594422">+41 22 559 44 22</a></li><li class="ft__sel"><a class="tel-link" href="mailto:kr@swiss-cloisons-solutions.com">kr@swiss-cloisons-solutions.com</a></li><li><a class="link-trace" href="https://www.linkedin.com/company/swiss-cloisons-solutions/" rel="noopener" target="_blank">LinkedIn</a></li></ul>
       </div>
       <div>
         <h2 data-i18n="ft.site">Site</h2>
         <ul><li><a class="link-trace" href="index.html" data-i18n="ft.accueil">Accueil</a></li><li><a class="link-trace" href="realisation-axa.html" data-i18n="ft.axa">Réalisation AXA</a></li><li><a class="link-trace" href="mentions-legales.html" data-i18n="ft.legal">Mentions légales et confidentialité</a></li></ul>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px"><button class="tool" type="button" data-calm aria-pressed="false" data-i18n="tool.calm">Réduire les animations</button><button class="tool" type="button" data-lang aria-label="English version">EN</button></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px"><button class="tool" type="button" data-calm aria-pressed="false" data-i18n="tool.calm">Réduire les animations</button><button class="tool" type="button" data-lang aria-label="EN, English version">EN</button></div>
       </div>
     </div>
     <div class="ft__bas"><span>© 2026 Swiss Cloisons Solutions</span><span data-i18n="ft.demo">Maquette de démonstration · contenus à valider par le client</span></div>
@@ -270,10 +270,10 @@
 <script src="assets/js/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/js/vendor/SplitText.min.js"></script>
 <script src="assets/js/vendor/lenis.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/sound.js"></script>
-<script src="assets/js/iso.js"></script>
-<script src="assets/js/core.js"></script>
-<script src="assets/js/devis.js"></script>
+<script src="assets/js/i18n.js?v=2"></script>
+<script src="assets/js/sound.js?v=2"></script>
+<script src="assets/js/iso.js?v=2"></script>
+<script src="assets/js/core.js?v=2"></script>
+<script src="assets/js/devis.js?v=2"></script>
 </body>
 </html>

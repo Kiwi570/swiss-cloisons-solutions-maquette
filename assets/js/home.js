@@ -27,6 +27,7 @@
 
   SCS.boot.then(function () {
     if (!gsap || !ST || calm) {
+      var ld = d.querySelector('.loader'); if (ld) ld.style.display = 'none';
       if (room) room.showAll();
       SCS.introDone = true;
       return;
@@ -92,10 +93,10 @@
   function manifeste() {
     var p = d.querySelector('[data-words]');
     if (p && window.SplitText) {
-      var s = window.SplitText.create(p, { type: 'words', wordsClass: 'w' });
+      var s = window.SplitText.create(p, { type: 'words', wordsClass: 'w', aria: 'none' }); // texte lu tel quel
       gsap.fromTo(s.words, { opacity: 0.14 }, { opacity: 1, stagger: 0.08, ease: 'none', scrollTrigger: { trigger: p, start: 'top 80%', end: 'bottom 45%', scrub: true } });
     }
-    gsap.from('.atout', { y: 50, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12, scrollTrigger: { trigger: '.atouts', start: 'top 80%', once: true } });
+    gsap.from('.atout', { y: 50, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12, scrollTrigger: { trigger: '.atouts', start: 'top 80%', toggleActions: 'play none none none' } });
     gsap.fromTo('.manif__bg img', { scale: 1.15 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.manif', start: 'top bottom', end: 'bottom top', scrub: true } });
   }
 
@@ -119,7 +120,7 @@
         },
         onUpdate: layer === 'plafond' ? function (s) { if (sound()) sound().setAbsorb(s.progress); } : undefined
       });
-      gsap.from(st.querySelectorAll('.step__num, .h3, p, .chips'), { y: 30, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06, scrollTrigger: { trigger: st, start: 'top 75%', once: true } });
+      gsap.from(st.querySelectorAll('.step__num, .h3, p, .chips'), { y: 30, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06, scrollTrigger: { trigger: st, start: 'top 75%', toggleActions: 'play none none none' } });
     });
     ST.create({ trigger: '.metiers', start: 'bottom 60%', onEnter: function () { room.focus(null); }, onLeaveBack: function () { room.focus('sav'); } });
   }
@@ -134,6 +135,7 @@
       if (num) num.textContent = String(Math.min(cards.length, Math.floor(p * (cards.length - 1) + 0.5) + 1)).padStart(2, '0') + ' / ' + String(cards.length).padStart(2, '0');
     };
     mm.add('(min-width: 761px)', function () {
+      var sec = track.closest('.reals'); if (sec) sec.classList.add('is-h');
       var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
       var tw = gsap.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '.reals__pin', start: 'top 14%', end: function () { return '+=' + dist(); }, pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1, onUpdate: function (st) { prog(st.progress); } } });
       track.querySelectorAll('.card').forEach(function (card) {
@@ -141,11 +143,12 @@
         gsap.set(img, { scale: 1.18 });
         gsap.fromTo(img, { xPercent: 7 }, { xPercent: -7, ease: 'none', scrollTrigger: { trigger: card, containerAnimation: tw, start: 'left right', end: 'right left', scrub: true } });
       });
+      return function () { if (sec) sec.classList.remove('is-h'); };
     });
     mm.add('(max-width: 760px)', function () {
       var onS = function () { var m = track.scrollWidth - track.clientWidth; prog(m > 0 ? track.scrollLeft / m : 1); };
       track.addEventListener('scroll', onS, { passive: true });
-      gsap.from(track.querySelectorAll('.card'), { x: 60, opacity: 0, duration: 1, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: track, start: 'top 85%', once: true } });
+      gsap.from(track.querySelectorAll('.card'), { x: 60, opacity: 0, duration: 1, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: track, start: 'top 85%', toggleActions: 'play none none none' } });
     });
   }
 
@@ -163,15 +166,15 @@
       });
     });
     mm.add('(max-width: 960px)', function () {
-      gsap.fromTo(rail, { '--k': 0 }, { '--k': 1, duration: 1.2, ease: 'expo.inOut', scrollTrigger: { trigger: rail, start: 'top 85%', once: true } });
-      panels.forEach(function (p) { gsap.from(p, { x: 80, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: p, start: 'top 88%', once: true } }); });
+      gsap.fromTo(rail, { '--k': 0 }, { '--k': 1, duration: 1.2, ease: 'expo.inOut', scrollTrigger: { trigger: rail, start: 'top 85%', toggleActions: 'play none none none' } });
+      panels.forEach(function (p) { gsap.from(p, { x: 80, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: p, start: 'top 88%', toggleActions: 'play none none none' } }); });
     });
   }
 
   function confiance() {
     var q = d.querySelector('[data-quote]');
     if (q) {
-      SCS.splitLines(q.querySelector('span'), { scrollTrigger: { trigger: q, start: 'top 80%', once: true }, stagger: 0.12, duration: 1.3 });
+      SCS.splitLines(q.querySelector('span'), { scrollTrigger: { trigger: q, start: 'top 80%', toggleActions: 'play none none none' }, stagger: 0.12, duration: 1.3 });
       gsap.fromTo(q, { '--sx': '-100%' }, { '--sx': '100%', ease: 'none', scrollTrigger: { trigger: q, start: 'top 85%', end: 'bottom 20%', scrub: true } });
     }
     if (rot) {
@@ -185,7 +188,7 @@
         gsap.fromTo(b, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.6, ease: 'expo.inOut' });
       }, 2200);
     }
-    gsap.from('.logo-tile', { y: 30, opacity: 0, duration: 0.8, ease: 'expo.out', stagger: 0.05, scrollTrigger: { trigger: '.logos', start: 'top 85%', once: true } });
+    gsap.from('.logo-tile', { y: 30, opacity: 0, duration: 0.8, ease: 'expo.out', stagger: 0.05, scrollTrigger: { trigger: '.logos', start: 'top 85%', toggleActions: 'play none none none' } });
   }
 
   function carteAnim() {
@@ -193,7 +196,7 @@
     if (!svg || !svg.__lake) return;
     var lake = svg.__lake, len = lake.getTotalLength();
     gsap.set(lake, { strokeDasharray: len, strokeDashoffset: len, fillOpacity: 0 });
-    var tl = gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 75%', once: true } });
+    var tl = gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 75%', toggleActions: 'play none none none' } });
     tl.to(lake, { strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut' })
       .to(lake, { fillOpacity: 1, duration: 1 }, '-=0.6')
       .from(svg.querySelectorAll('.ville'), { opacity: 0, y: 6, stagger: 0.08, duration: 0.5 }, '-=0.8')

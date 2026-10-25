@@ -36,7 +36,7 @@
     }
     var sum = d.querySelector('[data-sum]');
     var s = form.elements.surface.value;
-    sum.textContent = t.length ? tradeLabels().join(' · ') + ' — ' + s + ' m²' : T('dv.sumvide', 'Choisissez vos travaux : le schéma se construit.');
+    sum.textContent = t.length ? tradeLabels().join(' · ') + ' — ' + s + ' m²' : T('dv.sumvide', 'Choisissez vos travaux : le schéma se construit.');
   }
 
   /* ---------- Brouillon */
@@ -106,11 +106,11 @@
       if (!ok) bad = d.getElementById('t-cloisons');
     }
     if (i === 3) {
-      var req = [['entreprise', T('dv.e.entreprise', "Indiquez le nom de l'entreprise.")], ['prenom', T('dv.e.prenom', 'Indiquez votre prénom.')], ['nom', T('dv.e.nom', 'Indiquez votre nom.')], ['email', ''], ['tel', ''], ['objet', T('dv.e.objet', "Indiquez l'objet de votre demande.")], ['message', T('dv.e.message', 'Décrivez votre besoin en quelques mots.')]];
+      var req = [['entreprise', T('dv.e.entreprise', "Indiquez le nom de l’entreprise.")], ['prenom', T('dv.e.prenom', 'Indiquez votre prénom.')], ['nom', T('dv.e.nom', 'Indiquez votre nom.')], ['email', ''], ['tel', ''], ['objet', T('dv.e.objet', "Indiquez l’objet de votre demande.")], ['message', T('dv.e.message', 'Décrivez votre besoin en quelques mots.')]];
       req.forEach(function (r) {
         var el = d.getElementById(r[0]), v = el.value.trim(), msg = '';
         if (r[0] === 'email') msg = !v ? T('dv.e.email0', 'Indiquez votre e-mail.') : (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : T('dv.e.email', "Cet e-mail semble incomplet, par exemple nom@entreprise.ch."));
-        else if (r[0] === 'tel') msg = !v ? T('dv.e.tel0', 'Indiquez un numéro de téléphone.') : (v.replace(/\D/g, '').length >= 8 ? '' : T('dv.e.tel', 'Ce numéro semble trop court : au moins 8 chiffres.'));
+        else if (r[0] === 'tel') msg = !v ? T('dv.e.tel0', 'Indiquez un numéro de téléphone.') : (v.replace(/\D/g, '').length >= 8 ? '' : T('dv.e.tel', 'Ce numéro semble trop court : au moins 8 chiffres.'));
         else if (!v) msg = r[1];
         setErr(r[0], msg);
         if (msg && !bad) bad = el;
@@ -134,7 +134,7 @@
       [T('dv.r.travaux', 'Travaux'), tradeLabels().join(', '), 0],
       [T('dv.r.precisions', 'Précisions'), types.length ? types.join(', ') : '—', 1],
       [T('dv.r.surface', 'Surface'), F.surface.value + ' m²', 1],
-      [T('dv.r.locaux', 'Locaux'), (loc ? labelOf(loc) : '—') + (occ ? ' · ' + T('dv.r.occupes', 'occupés pendant les travaux') + ' : ' + labelOf(occ).toLowerCase() : ''), 1],
+      [T('dv.r.locaux', 'Locaux'), (loc ? labelOf(loc) : '—') + (occ ? ' · ' + T('dv.r.occupes', 'occupés pendant les travaux') + ' : ' + labelOf(occ).toLowerCase() : ''), 1],
       [T('dv.r.lieu', 'Lieu'), sel(F.lieu) + (F.localite.value ? ', ' + F.localite.value : ''), 2],
       [T('dv.r.debut', 'Début'), sel(F.debut), 2],
       [T('dv.r.fichiers', 'Fichiers'), plans.files.length ? Array.prototype.map.call(plans.files, function (f) { return f.name; }).join(', ') : '—', 2],
@@ -148,7 +148,7 @@
       var div = d.createElement('div');
       var dt = d.createElement('dt'); dt.textContent = r[0];
       var dd = d.createElement('dd'); dd.textContent = r[1];
-      var b = d.createElement('button'); b.type = 'button'; b.textContent = T('dv.modifier', 'Modifier'); b.setAttribute('aria-label', T('dv.modifier', 'Modifier') + ' : ' + r[0]);
+      var b = d.createElement('button'); b.type = 'button'; b.textContent = T('dv.modifier', 'Modifier'); b.setAttribute('aria-label', T('dv.modifier', 'Modifier') + ' : ' + r[0]);
       b.addEventListener('click', function () { go(r[2]); });
       div.appendChild(dt); div.appendChild(dd); div.appendChild(b); dl.appendChild(div);
     });
@@ -162,7 +162,7 @@
     prev.hidden = cur === 0;
     next.hidden = cur === steps.length - 1;
     submit.hidden = cur !== steps.length - 1;
-    if (cur === 3 && !form.elements.objet.value) form.elements.objet.value = T('dv.objetauto', 'Devis') + ' : ' + tradeLabels().join(', ');
+    if (cur === 3 && !form.elements.objet.value) form.elements.objet.value = T('dv.objetauto', 'Devis') + ' : ' + tradeLabels().join(', ');
     if (cur === 4) recap();
     if (gsap && !calm) gsap.from(steps[cur].querySelectorAll('legend, .q, .field, .recap, .tiles'), { y: 18, opacity: 0, duration: 0.6, ease: 'expo.out', stagger: 0.04 });
     if (fromNext) {

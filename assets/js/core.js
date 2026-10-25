@@ -51,7 +51,7 @@
   /* ---------- Préférences : langue, animations */
   d.querySelectorAll('[data-lang]').forEach(function (b) {
     b.textContent = lang === 'en' ? 'FR' : 'EN';
-    b.setAttribute('aria-label', lang === 'en' ? 'Version française' : 'English version');
+    b.setAttribute('aria-label', lang === 'en' ? 'FR, version française' : 'EN, English version');
     b.addEventListener('click', function () { store.set('scs-lang', lang === 'en' ? 'fr' : 'en'); leave(null); });
   });
   d.querySelectorAll('[data-calm]').forEach(function (b) {
@@ -87,6 +87,7 @@
   var menu = d.getElementById('menu');
   var burger = d.querySelector('[data-burger]');
   var menuOpen = false;
+  if (menu) menu.setAttribute('data-lenis-prevent', '');
   function openMenu() {
     if (!menu) return;
     menu.hidden = false;
@@ -94,6 +95,7 @@
     burger.setAttribute('aria-expanded', 'true');
     burger.querySelector('span').textContent = SCS.t('tool.close', 'Fermer');
     menuOpen = true;
+    d.documentElement.classList.add('menu-open');
     if (SCS.lenis) SCS.lenis.stop();
     var first = menu.querySelector('a, button');
     if (first) setTimeout(function () { first.focus(); }, 50);
@@ -104,6 +106,7 @@
     burger.setAttribute('aria-expanded', 'false');
     burger.querySelector('span').textContent = SCS.t('tool.menu', 'Menu');
     menuOpen = false;
+    d.documentElement.classList.remove('menu-open');
     if (SCS.lenis) SCS.lenis.start();
     setTimeout(function () { if (!menuOpen) menu.hidden = true; }, 720);
     if (!noFocus) burger.focus();
@@ -141,17 +144,18 @@
     if (url.origin !== window.location.origin) return;
     var samePage = url.pathname.replace(/(index)?(\.html)?$/, '') === window.location.pathname.replace(/(index)?(\.html)?$/, '');
     if (samePage && url.hash) {
-      var t2 = d.getElementById(url.hash.slice(1));
+      var t2 = null; try { t2 = d.getElementById(decodeURIComponent(url.hash.slice(1))); } catch (er) { /* ancre invalide */ }
       if (t2) { e.preventDefault(); closeMenu(true); scrollToEl(t2); }
       return;
     }
+    if (samePage && url.search === window.location.search) { e.preventDefault(); closeMenu(true); scrollToEl(d.getElementById('contenu') || d.body); return; }
     e.preventDefault();
     closeMenu(true);
     leave(url.href);
   });
   if (window.location.hash.length > 1) {
-    var h0 = d.getElementById(window.location.hash.slice(1));
-    if (h0) setTimeout(function () { scrollToEl(h0); }, 400);
+    var h0 = null; try { h0 = d.getElementById(decodeURIComponent(window.location.hash.slice(1))); } catch (er) { /* ancre invalide */ }
+    if (h0) (SCS.boot && SCS.boot.then ? SCS.boot : Promise.resolve()).then(function () { setTimeout(function () { scrollToEl(h0); }, 400); }); // après la création des épinglages
   }
 
   /* ---------- En-tête : se cache en descendant, change de teinte sur fond sombre */
@@ -270,7 +274,7 @@
   SCS.splitLines = function (el, vars) {
     if (!window.SplitText || !gsap) return null;
     return window.SplitText.create(el, {
-      type: 'lines', mask: 'lines', linesClass: 'ln', autoSplit: true,
+      type: 'lines', mask: 'lines', linesClass: 'ln', autoSplit: true, aria: 'none',
       onSplit: function (self) {
         return gsap.from(self.lines, Object.assign({ yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: 0.09 }, vars || {}));
       }
@@ -281,14 +285,14 @@
     if (!gsap || !ST || calm) return;
     d.querySelectorAll('[data-split]').forEach(function (el) {
       if (el.closest('.hero') || el.closest('.fiche-hero')) return;
-      SCS.splitLines(el, { scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+      SCS.splitLines(el, { scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
     });
     d.querySelectorAll('[data-reveal]').forEach(function (el) {
-      gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+      gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
     });
     d.querySelectorAll('[data-img-reveal]').forEach(function (el) {
       var img = el.querySelector('img');
-      var tl = gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+      var tl = gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
       tl.from(el, { clipPath: 'inset(100% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' });
       if (img) tl.from(img, { scale: 1.28, duration: 1.8, ease: 'expo.out' }, 0);
     });
@@ -300,10 +304,10 @@
       var to = parseFloat(el.getAttribute('data-count'));
       var o = { v: 0 };
       el.textContent = '0';
-      gsap.to(o, { v: to, duration: 1.8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, onUpdate: function () { el.textContent = Math.round(o.v).toLocaleString(lang === 'en' ? 'en-GB' : 'fr-CH'); } });
+      gsap.to(o, { v: to, duration: 1.8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }, onUpdate: function () { el.textContent = Math.round(o.v).toLocaleString(lang === 'en' ? 'en-GB' : 'fr-CH'); } });
     });
     d.querySelectorAll('.cote__l').forEach(function (el) {
-      gsap.fromTo(el, { '--k': 0 }, { '--k': 1, duration: 1.4, ease: 'expo.inOut', delay: el.closest('.hero') ? 1.6 : 0, scrollTrigger: el.closest('.hero') ? null : { trigger: el, start: 'top 92%', once: true } });
+      gsap.fromTo(el, { '--k': 0 }, { '--k': 1, duration: 1.4, ease: 'expo.inOut', delay: el.closest('.hero') ? 1.6 : 0, scrollTrigger: el.closest('.hero') ? null : { trigger: el, start: 'top 92%', toggleActions: 'play none none none' } });
     });
     d.querySelectorAll('[data-marquee]').forEach(function (el) {
       gsap.fromTo(el, { x: 0 }, { x: function () { return -(el.scrollWidth - window.innerWidth) * 0.9; }, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true } });

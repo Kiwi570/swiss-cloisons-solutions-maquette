@@ -1,9 +1,9 @@
 /* Swiss Cloisons Solutions — maquette « Verre & Lumière »
    Trame : 12 colonnes comme une façade de cloisons modulaires ; profilés alu en filets, bande dépolie pour les titres. */
 
-@font-face { font-family: "Instrument Sans"; src: url("../fonts/instrument-sans-var.woff") format("woff"); font-weight: 400 700; font-stretch: 75% 100%; font-display: swap; }
-@font-face { font-family: "Instrument Serif"; src: url("../fonts/instrument-serif.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Instrument Serif"; src: url("../fonts/instrument-serif-italic.woff") format("woff"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("../fonts/instrument-sans-var.woff2") format("woff2"); font-weight: 400 700; font-stretch: 75% 100%; font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url("../fonts/instrument-serif.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url("../fonts/instrument-serif-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
 
 :root {
   /* Couleur */
@@ -309,7 +309,9 @@ html.has-cursor input, html.has-cursor textarea, html.has-cursor select, html.ha
 /* Réalisations */
 .reals { overflow: hidden; }
 .reals__pin { position: relative; }
-.reals__track { display: flex; gap: clamp(14px, 2vw, 24px); padding-left: max(var(--gut), var(--pad)); padding-right: max(var(--gut-r), var(--pad)); width: max-content; }
+.reals__track { display: flex; gap: clamp(14px, 2vw, 24px); padding-left: max(var(--gut), var(--pad)); padding-right: max(var(--gut-r), var(--pad)); width: auto; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; }
+/* piste défilable par défaut (mode calme, sans JS) ; en ligne figée seulement pendant l'épinglage */
+.reals.is-h .reals__track { width: max-content; overflow: visible; scroll-snap-type: none; }
 .card { position: relative; width: clamp(260px, 27vw, 400px); flex: none; display: grid; gap: 14px; text-decoration: none; color: inherit; perspective: 900px; }
 .card__media { aspect-ratio: 3 / 4; max-width: 100%; transform-style: preserve-3d; will-change: transform; }
 .card__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.45) 48%, rgba(255,255,255,.08) 56%, transparent 66%); transform: translateX(-110%); transition: transform 1s var(--ease); pointer-events: none; z-index: 2; }
@@ -462,7 +464,8 @@ html.calm .logos__track { animation: none; flex-wrap: wrap; width: auto; }
 .lot__img { aspect-ratio: 4 / 3; max-width: 100%; }
 @media (max-width: 860px) { .lot { grid-template-columns: 48px minmax(0, 1fr); } .lot__ico { width: 44px; height: 44px; } .lot__img { grid-column: 1 / -1; aspect-ratio: 16 / 9; } .lot p { grid-column: 2; } }
 .strip { overflow: hidden; }
-.strip__track { display: flex; gap: 12px; padding-left: max(var(--gut), var(--pad)); padding-right: max(var(--gut-r), var(--pad)); width: max-content; align-items: flex-end; }
+.strip__track { display: flex; gap: 12px; padding-left: max(var(--gut), var(--pad)); padding-right: max(var(--gut-r), var(--pad)); width: auto; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; align-items: flex-end; }
+.strip.is-h .strip__track { width: max-content; overflow: visible; scroll-snap-type: none; }
 .strip__item { flex: none; margin: 0; display: grid; gap: 8px; }
 .strip__item .media { height: clamp(300px, 62vh, 620px); aspect-ratio: 3 / 4; }
 .mosaic .media { display: block; }
@@ -496,7 +499,7 @@ html.calm .logos__track { animation: none; flex-wrap: wrap; width: auto; }
 .etapes li.is-done::before, .etapes li.is-current::before { transform: scaleX(1); opacity: 1; background: var(--verre); }
 .etapes li.is-current { color: var(--graphite); }
 .etapes li.is-current::before { background: var(--vert); }
-@media (max-width: 520px) { .etapes li span { display: none; } }
+@media (max-width: 520px) { .etapes li span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
 .form-step { display: grid; gap: 26px; border: 0; margin: 0; padding: 0; min-width: 0; }
 .form-step legend { padding: 0; margin-bottom: 6px; }
 .form-step legend .h3 { display: block; }
@@ -597,3 +600,27 @@ html.calm *, html.calm *::before, html.calm *::after { animation-duration: 0.001
 .p404__pane { z-index: 0; }
 @media (max-width: 720px) { .p404__pane { right: 0; width: 22%; } }
 .badge-illus { position: absolute; z-index: 3; right: 10px; bottom: 10px; font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--graphite); background: rgba(243,242,238,.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 3px 8px; border-radius: 99px; pointer-events: none; }
+
+/* ---------- Finitions (audit) ---------- */
+/* filet : le loader s'efface seul si le script de l'accueil ne l'a pas retiré */
+.loader { animation: scs-loader-off .3s 4.5s forwards; }
+@keyframes scs-loader-off { to { opacity: 0; visibility: hidden; } }
+/* menu : la page ne défile plus derrière, même sans Lenis ; défilable en paysage */
+html.menu-open { overflow: hidden; }
+.menu { overflow-y: auto; overscroll-behavior: contain; justify-content: safe flex-end; }
+@media (max-height: 520px) { .menu { justify-content: flex-start; padding-top: calc(72px + env(safe-area-inset-top, 0px)); gap: 16px; } .menu nav a { font-size: clamp(1.6rem, 6vh, 2.2rem); } }
+/* sans JS : bande des matières défilable ; portes vitrées ouvertes en mode calme et sans JS */
+html:not(.js) .matieres__track { width: auto; overflow-x: auto; }
+html.calm .cta__doors, html:not(.js) .cta__doors { display: none; }
+/* en-tête et barre mobile masqués : jamais de focus hors écran */
+.hd:focus-within { transform: none; }
+/* indication de la vitre : retour à la ligne sur les petits écrans */
+@media (max-width: 420px) { .wipe__hint { white-space: normal; text-align: center; width: calc(100% - 32px); } }
+/* coordonnées devenues liens : même dessin */
+a.tel-link { color: inherit; text-decoration: none; }
+/* défilé des logos : pause au focus */
+.logos__row:focus-within .logos__track { animation-play-state: paused; }
+/* cibles tactiles : 44 px */
+.tool, .btn--sm, .chip, .copy { min-height: 44px; }
+.recap button, .etapes button { min-height: 44px; display: inline-flex; align-items: center; }
+@media (pointer: coarse) { .ft ul a { display: inline-block; padding-block: 10px; } }

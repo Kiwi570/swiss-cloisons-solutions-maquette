@@ -39,7 +39,7 @@
     d.querySelectorAll('[data-lot]').forEach(function (lot) {
       var paths = lot.querySelectorAll('.lot__ico path');
       paths.forEach(function (p) { var L = p.getTotalLength(); gsap.set(p, { strokeDasharray: L, strokeDashoffset: L }); });
-      var t = gsap.timeline({ scrollTrigger: { trigger: lot, start: 'top 85%', once: true } });
+      var t = gsap.timeline({ scrollTrigger: { trigger: lot, start: 'top 85%', toggleActions: 'play none none none' } });
       t.to(paths, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: 0.12 })
         .from(lot.querySelectorAll('h3, p, .lot__num'), { y: 20, opacity: 0, duration: 0.8, stagger: 0.06 }, 0.1)
         .from(lot.querySelector('.lot__img'), { clipPath: 'inset(0% 100% 0% 0%)', duration: 1.1, ease: 'expo.inOut' }, 0.15);
@@ -47,8 +47,10 @@
 
     if (strip) {
       mm.add('(min-width: 761px)', function () {
+        var sec = strip.closest('.strip'); if (sec) sec.classList.add('is-h');
         var dist = function () { return Math.max(0, strip.scrollWidth - window.innerWidth); };
         gsap.to(strip, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '.strip__pin', start: 'top 12%', end: function () { return '+=' + dist(); }, pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1, onUpdate: function (s) { setProgress(s.progress); } } });
+        return function () { if (sec) sec.classList.remove('is-h'); };
       });
       mm.add('(max-width: 760px)', function () {
         strip.addEventListener('scroll', function () { var m = strip.scrollWidth - strip.clientWidth; setProgress(m > 0 ? strip.scrollLeft / m : 1); }, { passive: true });
@@ -56,7 +58,7 @@
     }
 
     gsap.utils.toArray('[data-mosaic] button').forEach(function (b, i) {
-      gsap.from(b, { y: 60, opacity: 0, duration: 1, ease: 'expo.out', delay: (i % 4) * 0.06, scrollTrigger: { trigger: b, start: 'top 95%', once: true } });
+      gsap.from(b, { y: 60, opacity: 0, duration: 1, ease: 'expo.out', delay: (i % 4) * 0.06, scrollTrigger: { trigger: b, start: 'top 95%', toggleActions: 'play none none none' } });
     });
   });
 
@@ -78,7 +80,7 @@
     var open = function (k) { opener = btns[k]; show(k); lb.hidden = false; if (SCS.lenis) SCS.lenis.stop(); lb.querySelector('[data-lb-close]').focus(); if (gsap && !calm) gsap.from(img, { scale: 0.96, opacity: 0, duration: 0.5, ease: 'expo.out' }); };
     var close = function () { lb.hidden = true; if (SCS.lenis) SCS.lenis.start(); if (opener) opener.focus(); };
     btns.forEach(function (b, k) {
-      b.setAttribute('aria-label', SCS.t('lb.ouvrir', 'Agrandir la photo') + ' : ' + b.querySelector('img').alt);
+      b.setAttribute('aria-label', SCS.t('lb.ouvrir', 'Agrandir la photo') + ' : ' + b.querySelector('img').alt);
       b.addEventListener('click', function () { open(k); });
     });
     lb.querySelector('[data-lb-close]').addEventListener('click', close);
