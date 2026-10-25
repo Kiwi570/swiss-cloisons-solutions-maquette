@@ -227,6 +227,14 @@
   }
 
   /* ---------- Visuels provisoires : un badge honnête */
+  d.querySelectorAll('img.is-illus').forEach(function (img) {
+    var box = img.closest('.media');
+    if (!box) return;
+    var b = d.createElement('span');
+    b.className = 'badge-illus';
+    b.textContent = SCS.t('illus', 'Illustration');
+    box.appendChild(b);
+  });
   d.querySelectorAll('img.is-provisoire').forEach(function (img) {
     var box = img.closest('.media');
     if (!box) return;

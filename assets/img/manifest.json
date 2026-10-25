@@ -37,26 +37,24 @@
  },
  "accueil/manifeste": {
   "w": [
-   1200,
-   2400
+   1168
   ],
   "ratio": [
-   2400,
-   1029
+   1168,
+   500
   ],
-  "kind": "provisoire",
+  "kind": "grok",
   "note": "grok-manifeste-lumiere"
  },
  "accueil/manifeste-mobile": {
   "w": [
-   720,
-   1080
+   657
   ],
   "ratio": [
-   1080,
-   1920
+   657,
+   1168
   ],
-  "kind": "provisoire",
+  "kind": "grok",
   "note": "grok-manifeste-lumiere-mobile"
  },
  "metiers/cloisons": {
@@ -98,13 +96,13 @@
  "metiers/sav": {
   "w": [
    600,
-   1200
+   784
   ],
   "ratio": [
-   1200,
-   1600
+   784,
+   1045
   ],
-  "kind": "provisoire",
+  "kind": "grok",
   "note": "grok-sav-reglage"
  },
  "projets/axa": {
@@ -230,25 +228,25 @@
  "methode/etude": {
   "w": [
    600,
-   1200
+   784
   ],
   "ratio": [
-   1200,
-   1600
+   784,
+   1045
   ],
-  "kind": "provisoire",
+  "kind": "grok",
   "note": "grok-methode-etude"
  },
  "methode/offre": {
   "w": [
    600,
-   1200
+   784
   ],
   "ratio": [
-   1200,
-   1600
+   784,
+   1045
   ],
-  "kind": "provisoire",
+  "kind": "grok",
   "note": "grok-methode-offre"
  },
  "methode/visite": {
@@ -290,13 +288,13 @@
  "confiance/reflets": {
   "w": [
    1000,
-   2000
+   1168
   ],
   "ratio": [
-   2000,
-   1125
+   1168,
+   657
   ],
-  "kind": "provisoire",
+  "kind": "grok",
   "note": "grok-confiance-reflets"
  },
  "cta/salle": {
@@ -322,29 +320,6 @@
   ],
   "kind": "photo",
   "note": "AXA salle de réunion"
- },
- "cta/reflets-soir": {
-  "w": [
-   1000,
-   2000
-  ],
-  "ratio": [
-   2000,
-   1125
-  ],
-  "kind": "provisoire",
-  "note": "grok-cta-reflets-soir"
- },
- "accueil/caustiques": {
-  "w": [
-   1200
-  ],
-  "ratio": [
-   1200,
-   675
-  ],
-  "kind": "provisoire",
-  "note": "grok-hero-caustiques"
  },
  "matieres/01": {
   "w": [
@@ -1116,26 +1091,24 @@
  },
  "devis/entete": {
   "w": [
-   1200,
-   2400
+   1168
   ],
   "ratio": [
-   2400,
-   1350
+   1168,
+   657
   ],
-  "kind": "provisoire",
+  "kind": "grok",
   "note": "grok-devis-entete"
  },
  "devis/entete-mobile": {
   "w": [
-   720,
-   1080
+   657
   ],
   "ratio": [
-   1080,
-   1920
+   657,
+   1168
   ],
-  "kind": "provisoire",
+  "kind": "grok",
   "note": "grok-devis-entete-mobile"
  },
  "devis/tuile-sav": {
@@ -1152,14 +1125,13 @@
  },
  "mentions/bandeau": {
   "w": [
-   1200,
-   2400
+   1168
   ],
   "ratio": [
-   2400,
-   1029
+   1168,
+   500
   ],
-  "kind": "provisoire",
+  "kind": "grok",
   "note": "grok-mentions-texture"
  },
  "logos/scs-logo": {

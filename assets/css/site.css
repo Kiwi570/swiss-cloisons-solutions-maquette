@@ -246,9 +246,9 @@ html.has-cursor input, html.has-cursor textarea, html.has-cursor select, html.ha
 
 /* Manifeste */
 .manif { overflow: hidden; }
-.manif__bg { position: absolute; inset: 0; opacity: .5; }
-.manif__bg img { width: 100%; height: 100%; object-fit: cover; }
-.manif__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--calcaire) 0%, rgba(243,242,238,.55) 30%, rgba(243,242,238,.55) 70%, var(--calcaire) 100%); }
+.manif__bg { position: absolute; inset: 0; opacity: .8; }
+.manif__bg picture, .manif__bg img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.manif__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--calcaire) 0%, rgba(243,242,238,.45) 28%, rgba(243,242,238,.5) 72%, var(--calcaire) 100%), linear-gradient(90deg, rgba(243,242,238,.55), rgba(243,242,238,0) 60%); }
 .manif__text { position: relative; font-size: clamp(1.75rem, 1rem + 3.2vw, 4rem); line-height: 1.06; letter-spacing: -0.028em; font-weight: 500; font-stretch: 84%; margin: 0; max-width: 22ch; text-wrap: balance; }
 .manif__text .w { color: var(--graphite); }
 .manif__text .serif { color: var(--vert-fonce); }
@@ -596,3 +596,4 @@ html.calm *, html.calm *::before, html.calm *::after { animation-duration: 0.001
 .p404 > :not(.p404__pane) { position: relative; z-index: 1; }
 .p404__pane { z-index: 0; }
 @media (max-width: 720px) { .p404__pane { right: 0; width: 22%; } }
+.badge-illus { position: absolute; z-index: 3; right: 10px; bottom: 10px; font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--graphite); background: rgba(243,242,238,.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 3px 8px; border-radius: 99px; pointer-events: none; }

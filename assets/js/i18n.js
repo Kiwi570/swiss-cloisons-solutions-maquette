@@ -19,6 +19,7 @@ window.SCS_I18N = { en: {
   'cta.devis': 'Request a quote',
   'cta.reals': 'See our projects',
   'prov': 'Placeholder · Grok image to come',
+  'illus': 'Illustration',
   'copy': 'Copy',
   'copied': 'Copied',
   'selected': 'Selected',
