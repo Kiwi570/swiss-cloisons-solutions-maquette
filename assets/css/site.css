@@ -21,7 +21,7 @@
   --vert-fonce: #245A54;
   --vert-clair: #8FC2BA;
   --texte-2: #4E565B;
-  --texte-3: #6B7377;
+  --texte-3: #5C6468;
   --filet: rgba(27, 30, 33, 0.14);
   --filet-clair: rgba(243, 242, 238, 0.16);
   --todo: #8A5A1E;
@@ -138,6 +138,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hd__name b { font-weight: 600; }
 .hd__nav { display: flex; gap: 26px; font-size: var(--t-sm); }
 .hd__nav a { text-decoration: none; }
+.hd__nav a.is-active { background-size: 100% 1px; }
 .hd__tools { display: flex; align-items: center; gap: 8px; }
 .hd__tel { font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: 0.02em; padding-inline: 8px; user-select: all; white-space: nowrap; }
 .tool { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 12px; border-radius: 99px; border: 1px solid var(--filet); background: transparent; cursor: pointer; font-size: var(--t-xs); font-family: var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; }
@@ -149,12 +150,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tool[aria-pressed="true"] .bars i:nth-child(2) { animation-delay: -.3s; }
 .tool[aria-pressed="true"] .bars i:nth-child(3) { animation-delay: -.6s; }
 @keyframes bars { 0%, 100% { height: 3px; } 50% { height: 12px; } }
-.hd__burger { display: none; }
-@media (max-width: 1080px) { .hd__nav, .hd__tel { display: none; } .hd__burger { display: inline-flex; } }
+.hd__tools .hd__burger { display: none; }
+@media (max-width: 1080px) { .hd__nav, .hd__tel { display: none; } .hd__tools .hd__burger { display: inline-flex; } }
 @media (hover: none) { .hero__scroll { display: none; } }
 @media (max-width: 720px) {
-  .hd__tools .tool, .hd__tools .btn { display: none; }
-  .hd__burger { display: inline-flex; }
+  .hd__tools .tool:not(.hd__burger), .hd__tools .btn { display: none; }
   .hd__name { font-size: 0.6875rem; }
 }
 
@@ -169,7 +169,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* ---------- Ouverture */
 .loader { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: var(--calcaire); }
-.loader svg { width: min(180px, 40vw); overflow: visible; }
+.loader__in { display: grid; justify-items: center; gap: 22px; }
+.loader svg { width: min(150px, 34vw); overflow: visible; }
+.loader__name { font-weight: 600; font-stretch: 85%; font-size: 0.875rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--graphite); text-align: center; line-height: 1.5; }
+.loader__name span { display: block; font-family: var(--f-mono); font-weight: 400; font-size: 0.6875rem; letter-spacing: 0.3em; color: var(--texte-3); }
 .loader path { fill: none; stroke: var(--graphite); stroke-width: 18; }
 .loader__count { position: absolute; left: max(var(--gut), 24px); bottom: calc(24px + env(safe-area-inset-bottom, 0px)); font-family: var(--f-mono); font-size: var(--t-xs); color: var(--texte-3); }
 html:not(.js) .loader, html.calm .loader { display: none; }
@@ -270,7 +273,7 @@ html.has-cursor input, html.has-cursor textarea, html.has-cursor select, html.ha
 .metiers { overflow: clip; }
 .metiers__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 80px); align-items: start; }
 .metiers__steps { display: grid; gap: 0; }
-.step { min-height: 92vh; display: grid; align-content: center; gap: 18px; padding-block: 40px; border-top: 1px solid var(--filet-clair); }
+.step { min-height: 78vh; display: grid; align-content: center; gap: 18px; padding-block: 40px; border-top: 1px solid var(--filet-clair); }
 .step:first-child { border-top: 0; }
 .step__num { font-family: var(--f-mono); font-size: var(--t-xs); color: var(--vert-clair); letter-spacing: .08em; }
 .step__img { width: min(100%, 360px); aspect-ratio: 3 / 4; }
@@ -292,7 +295,8 @@ html.has-cursor input, html.has-cursor textarea, html.has-cursor select, html.ha
 .spec { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: var(--t-sm); color: var(--alu-2); }
 @media (max-width: 960px) {
   .metiers__grid { grid-template-columns: 1fr; }
-  .metiers__stage { top: calc(72px + env(safe-area-inset-top, 0px)); height: 44vh; z-index: 2; background: var(--graphite); padding-block: 6px 10px; border-bottom: 1px solid var(--filet-clair); box-shadow: 0 18px 18px -6px var(--graphite); order: -1; }
+  .stage__legend { display: none; }
+  .metiers__stage { top: calc(72px + env(safe-area-inset-top, 0px)); height: 36vh; z-index: 2; background: var(--graphite); padding-block: 6px 10px; border-bottom: 1px solid var(--filet-clair); box-shadow: 0 18px 18px -6px var(--graphite); order: -1; }
   .step { min-height: auto; padding-block: 56px; }
 }
 
@@ -300,7 +304,7 @@ html.has-cursor input, html.has-cursor textarea, html.has-cursor select, html.ha
 .iso .tile { stroke-width: 1; vector-effect: non-scaling-stroke; }
 .iso .ped { stroke-width: 1; vector-effect: non-scaling-stroke; }
 .iso .pane { vector-effect: non-scaling-stroke; }
-.iso text { font-family: var(--f-mono); font-size: 11px; }
+.iso text { font-family: var(--f-mono); font-size: 14px; letter-spacing: .02em; }
 
 /* Réalisations */
 .reals { overflow: hidden; }
@@ -570,3 +574,25 @@ html.calm *, html.calm *::before, html.calm *::after { animation-duration: 0.001
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
+
+/* ---------- v2 : barre d'action mobile, galerie, étapes cliquables, 404 */
+.card__meta .todo { border: 0; background: none; padding: 0; color: var(--texte-3); text-transform: none; letter-spacing: 0.02em; font-size: var(--t-xs); }
+.card__meta .todo::before { content: ""; width: 10px; height: 0; border-top: 1px dashed currentColor; display: inline-block; vertical-align: middle; margin-right: 6px; }
+.reals__progress { margin-top: 28px; }
+.dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; display: none; gap: 8px; padding: 10px max(var(--gut-r), 12px) calc(10px + env(safe-area-inset-bottom, 0px)) max(var(--gut), 12px); background: rgba(243, 242, 238, 0.78); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4); box-shadow: 0 -1px 0 var(--filet), 0 -16px 40px -28px rgba(27,30,33,.5); transform: translateY(110%); transition: transform .5s var(--ease); }
+.dock.is-on { transform: translateY(0); }
+.dock .btn { flex: 1; justify-content: center; min-height: 48px; padding: 12px 14px; }
+.dock__tel > span { display: grid; gap: 2px; line-height: 1.1; text-align: left; white-space: nowrap; }
+.dock__tel small { font-family: var(--f-mono); font-size: 10px; letter-spacing: .02em; opacity: .75; font-weight: 400; }
+@media (max-width: 720px) { .dock { display: flex; } .ft { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } }
+.etapes button { all: unset; cursor: pointer; display: block; }
+.etapes button:focus-visible { outline: 2px solid var(--vert); outline-offset: 4px; }
+.etapes li.is-done { color: var(--graphite); }
+.etapes li.is-done button:hover span { text-decoration: underline; }
+.p404 { min-height: 100svh; display: grid; align-content: center; gap: 24px; padding-block: 140px 80px; position: relative; overflow: hidden; }
+.p404__num { font-size: clamp(7rem, 4rem + 18vw, 20rem); line-height: .8; font-weight: 600; font-stretch: 75%; letter-spacing: -0.06em; margin: 0; color: var(--graphite); }
+.p404__pane { position: absolute; top: 0; bottom: 0; right: 12%; width: 28%; background: linear-gradient(100deg, rgba(255,255,255,.4), rgba(207,224,222,.3) 40%, rgba(255,255,255,.12)); backdrop-filter: blur(6px) saturate(1.2); -webkit-backdrop-filter: blur(6px) saturate(1.2); border-left: 3px solid rgba(255,255,255,.85); border-right: 3px solid var(--alu); pointer-events: none; }
+.p404__pane::after { content: ""; position: absolute; left: 0; right: 0; top: 58%; height: 8%; background: rgba(250,252,252,.7); }
+.p404 > :not(.p404__pane) { position: relative; z-index: 1; }
+.p404__pane { z-index: 0; }
+@media (max-width: 720px) { .p404__pane { right: 0; width: 22%; } }

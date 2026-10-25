@@ -4,7 +4,7 @@
   'use strict';
   var NS = 'http://www.w3.org/2000/svg';
   var C30 = Math.cos(Math.PI / 6), S30 = 0.5, U = 34;
-  var W = 8, D = 6, H = 4.2, ZF = -1.8, ZC = H + 1.8;
+  var W = 8, D = 6, H = 4.2, ZF = -1.3, ZC = H + 1.3;
   var COL = {
     tile: '#2B3135', tileS: '#4E575D', side: '#20252A', ped: '#79848A', hole: '#111417',
     glass: 'rgba(143,194,186,.22)', glassS: '#B3BBBE', band: 'rgba(243,242,238,.34)', joint: 'rgba(255,255,255,.42)',

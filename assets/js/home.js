@@ -48,7 +48,9 @@
     var title = d.querySelector('.hero__title');
     var split = window.SplitText ? window.SplitText.create(title, { type: 'lines', mask: 'lines', linesClass: 'ln' }) : null;
     gsap.set('.hero__media', { scale: 1.08 });
-    if (loader && !SCS.swept) {
+    var seen = false;
+    try { seen = window.sessionStorage.getItem('scs-intro') === '1'; window.sessionStorage.setItem('scs-intro', '1'); } catch (e) { /* rien */ }
+    if (loader && !SCS.swept && !seen && window.location.hash.length < 2) {
       var path = loader.querySelector('path');
       var len = path.getTotalLength();
       var cnt = loader.querySelector('.loader__count');
@@ -56,12 +58,13 @@
       gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
       tl.to(path, { strokeDashoffset: 0, duration: 1.3, ease: 'power2.inOut' }, 0)
         .to(o, { v: 100, duration: 1.3, ease: 'power2.inOut', onUpdate: function () { cnt.textContent = String(Math.round(o.v)).padStart(3, '0'); } }, 0)
+        .from(loader.querySelector('.loader__name'), { y: 14, opacity: 0, duration: 0.8, ease: 'expo.out' }, 0.55)
         .to(loader, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.8, ease: 'expo.inOut' }, 1.35)
         .set(loader, { display: 'none' });
     } else if (loader) {
       loader.style.display = 'none';
     }
-    var at = loader && !SCS.swept ? 1.55 : 0.2;
+    var at = (loader && loader.style.display !== 'none' && !SCS.swept && !seen) ? 1.55 : 0.2;
     tl.call(function () { SCS.introDone = true; window.dispatchEvent(new CustomEvent('scs:intro')); }, null, at - 0.2)
       .to('.hero__media', { scale: 1, duration: 2.2, ease: 'expo.out' }, at - 0.3);
     if (split) tl.from(split.lines, { yPercent: 110, duration: 1.2, stagger: 0.1 }, at);
@@ -124,9 +127,15 @@
   function reals() {
     var track = d.querySelector('[data-hscroll]');
     if (!track) return;
+    var bar = d.querySelector('[data-reals-bar]'), num = d.querySelector('[data-reals-n]');
+    var cards = track.querySelectorAll('.card');
+    var prog = function (p) {
+      if (bar) bar.style.setProperty('--p', p.toFixed(3));
+      if (num) num.textContent = String(Math.min(cards.length, Math.floor(p * (cards.length - 1) + 0.5) + 1)).padStart(2, '0') + ' / ' + String(cards.length).padStart(2, '0');
+    };
     mm.add('(min-width: 761px)', function () {
       var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
-      var tw = gsap.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '.reals__pin', start: 'top 14%', end: function () { return '+=' + dist(); }, pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1 } });
+      var tw = gsap.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '.reals__pin', start: 'top 14%', end: function () { return '+=' + dist(); }, pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1, onUpdate: function (st) { prog(st.progress); } } });
       track.querySelectorAll('.card').forEach(function (card) {
         var img = card.querySelector('img');
         gsap.set(img, { scale: 1.18 });
@@ -134,6 +143,8 @@
       });
     });
     mm.add('(max-width: 760px)', function () {
+      var onS = function () { var m = track.scrollWidth - track.clientWidth; prog(m > 0 ? track.scrollLeft / m : 1); };
+      track.addEventListener('scroll', onS, { passive: true });
       gsap.from(track.querySelectorAll('.card'), { x: 60, opacity: 0, duration: 1, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: track, start: 'top 85%', once: true } });
     });
   }
@@ -144,11 +155,11 @@
     var panels = stage.querySelectorAll('.panneau');
     var rail = stage.querySelector('.rail');
     mm.add('(min-width: 961px)', function () {
-      var tl = gsap.timeline({ scrollTrigger: { trigger: stage, start: 'top 22%', end: '+=170%', pin: '.methode', scrub: 0.7, anticipatePin: 1 } });
+      var tl = gsap.timeline({ scrollTrigger: { trigger: stage, start: 'top 22%', end: '+=130%', pin: '.methode', scrub: 0.7, anticipatePin: 1 } });
       tl.fromTo(rail, { '--k': 0 }, { '--k': 1, duration: 0.6, ease: 'none' });
       panels.forEach(function (p, i) {
-        tl.fromTo(p, { xPercent: 160 + (4 - i) * 40, opacity: 0, rotateY: -18 }, { xPercent: 0, opacity: 1, rotateY: 0, duration: 1, ease: 'power3.out', transformPerspective: 1200 }, 0.4 + i * 0.75)
-          .call(function () { if (sound()) sound().tink(0.9 + i * 0.05); }, null, 1.35 + i * 0.75);
+        tl.fromTo(p, { xPercent: 130 + (4 - i) * 30, opacity: 0, rotateY: -18 }, { xPercent: 0, opacity: 1, rotateY: 0, duration: 1, ease: 'power3.out', transformPerspective: 1200 }, 0.1 + i * 0.6)
+          .call(function () { if (sound()) sound().tink(0.9 + i * 0.05); }, null, 1.05 + i * 0.6);
       });
     });
     mm.add('(max-width: 960px)', function () {

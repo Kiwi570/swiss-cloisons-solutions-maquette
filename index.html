@@ -11,8 +11,13 @@
 <meta property="og:image" content="assets/img/partage.jpg">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#F3F2EE">
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/instrument-sans-var.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" as="image" href="assets/img/accueil/hero-1200.webp" imagesrcset="assets/img/accueil/hero-1200.webp 1200w, assets/img/accueil/hero-2000.webp 2000w" imagesizes="100vw" media="(min-width: 721px)">
+<link rel="preload" as="image" href="assets/img/accueil/hero-mobile-720.webp" imagesrcset="assets/img/accueil/hero-mobile-720.webp 720w, assets/img/accueil/hero-mobile-1125.webp 1125w" imagesizes="100vw" media="(max-width: 720px)">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"GeneralContractor","name":"Swiss Cloisons Solutions","description":"Cloisons, faux-plafonds et faux-planchers pour les bureaux, en Suisse et en France.","telephone":"+41 22 559 44 22","email":"kr@swiss-cloisons-solutions.com","address":{"@type":"PostalAddress","streetAddress":"Route des Jeunes 25","postalCode":"1227","addressLocality":"Carouge","addressRegion":"GE","addressCountry":"CH"},"areaServed":["CH","FR"],"sameAs":["https://www.linkedin.com/company/swiss-cloisons-solutions/"]}</script>
 <link rel="stylesheet" href="assets/css/site.css">
 <script>(function(){var d=document.documentElement;d.classList.add('js');var c=false,l='fr';try{c=localStorage.getItem('scs-calm')==='1';l=localStorage.getItem('scs-lang')||'fr'}catch(e){}if(c||matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('calm');if(l==='en'){d.lang='en';d.classList.add('lang-en')}})();</script>
 </head>
@@ -20,7 +25,10 @@
 <a class="skip" href="#contenu" data-i18n="skip">Aller au contenu</a>
 
 <div class="loader" aria-hidden="true">
-  <svg viewBox="-20 -20 1210 1490"><path d="M135 1430H10V600L585 95l575 505v840L487 840V0"/></svg>
+  <div class="loader__in">
+    <svg viewBox="-20 -20 1210 1490"><path d="M135 1430H10V600L585 95l575 505v840L487 840V0"/></svg>
+    <p class="loader__name">Swiss Cloisons Solutions<span data-i18n="loader.sous">Aménagement intérieur</span></p>
+  </div>
   <span class="loader__count tnum">000</span>
 </div>
 <div class="sweep" aria-hidden="true"></div>
@@ -212,7 +220,7 @@
     <div class="sec__head sec__head--split">
       <div>
         <p class="eyebrow" data-i18n="reals.eyebrow">Nos réalisations</p>
-        <h2 class="h2" id="reals-titre" data-split data-i18n="reals.titre">Huit plateaux, <span class="serif">huit métiers.</span></h2>
+        <h2 class="h2" id="reals-titre" data-split data-i18n="reals.titre">Huit projets, <span class="serif">huit univers.</span></h2>
       </div>
       <p class="lead" data-i18n="reals.lead">Horlogerie, banques, assurances, commerces… Notre équipe répond à vos exigences en cloisons et faux-plafonds, souvent aux côtés des entreprises générales qui nous mandatent.</p>
     </div>
@@ -268,6 +276,7 @@
         <span class="card__cta" data-i18n="r.bientot">Fiche à venir</span>
       </article>
     </div>
+    <div class="wrap"><div class="progress reals__progress" aria-hidden="true"><span data-i18n="nav.reals">Réalisations</span><span class="progress__bar"><i data-reals-bar></i></span><span class="tnum" data-reals-n>01 / 08</span></div></div>
   </div>
   <div class="wrap">
     <div class="chiffres">
@@ -423,6 +432,11 @@
     <div class="ft__bas"><span>© 2026 Swiss Cloisons Solutions</span><span data-i18n="ft.demo">Maquette de démonstration · contenus à valider par le client</span></div>
   </div>
 </footer>
+
+<div class="dock" data-dock>
+  <a class="btn btn--ghost dock__tel" href="tel:+41225594422"><span><span data-i18n="dock.appeler">Appeler</span><small class="tnum">+41 22 559 44 22</small></span></a>
+  <a class="btn" href="devis.html"><span data-i18n="cta.devis">Demander un devis</span></a>
+</div>
 
 <script src="assets/js/vendor/gsap.min.js"></script>
 <script src="assets/js/vendor/ScrollTrigger.min.js"></script>

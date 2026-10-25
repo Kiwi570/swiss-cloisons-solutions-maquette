@@ -158,7 +158,7 @@
   function go(i, fromNext) {
     cur = Math.max(0, Math.min(steps.length - 1, i));
     steps.forEach(function (s, k) { s.hidden = k !== cur; });
-    etapes.forEach(function (li, k) { li.classList.toggle('is-done', k < cur); li.classList.toggle('is-current', k === cur); if (k === cur) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+    etapes.forEach(function (li, k) { li.classList.toggle('is-done', k < cur); li.classList.toggle('is-current', k === cur); if (k === cur) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); var bt = li.querySelector('button'); if (bt) bt.disabled = !(k < cur); });
     prev.hidden = cur === 0;
     next.hidden = cur === steps.length - 1;
     submit.hidden = cur !== steps.length - 1;
@@ -175,6 +175,7 @@
     save();
   }
   next.addEventListener('click', function () { if (validate(cur)) go(cur + 1, true); });
+  d.querySelectorAll('.etapes [data-goto]').forEach(function (bt) { bt.addEventListener('click', function () { var k = +bt.getAttribute('data-goto'); if (k < cur) go(k, true); }); });
   prev.addEventListener('click', function () { go(cur - 1, true); });
   form.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox' && e.target.type !== 'radio' && cur < steps.length - 1) { e.preventDefault(); next.click(); }

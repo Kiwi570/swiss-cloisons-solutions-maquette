@@ -9,7 +9,9 @@
 <meta property="og:title" content="Demande de devis · Swiss Cloisons Solutions">
 <meta property="og:image" content="assets/img/partage.jpg">
 <meta name="theme-color" content="#F3F2EE">
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/instrument-sans-var.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
 <script>(function(){var d=document.documentElement;d.classList.add('js');var c=false,l='fr';try{c=localStorage.getItem('scs-calm')==='1';l=localStorage.getItem('scs-lang')||'fr'}catch(e){}if(c||matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('calm');if(l==='en'){d.lang='en';d.classList.add('lang-en')}})();</script>
@@ -60,7 +62,7 @@
   <div class="hero__media">
     <picture>
       <source srcset="assets/img/devis/entete-mobile-720.webp 720w, assets/img/devis/entete-mobile-1080.webp 1080w" width="1080" height="1920" data-slot="devis/entete-mobile" media="(max-width: 720px)" sizes="100vw">
-      <img class="is-provisoire" src="assets/img/devis/entete-1200.webp" srcset="assets/img/devis/entete-1200.webp 1200w, assets/img/devis/entete-2400.webp 2400w" width="2400" height="1350" data-slot="devis/entete" sizes="100vw" alt="" fetchpriority="high">
+      <img src="assets/img/devis/entete-1200.webp" srcset="assets/img/devis/entete-1200.webp 1200w, assets/img/devis/entete-2400.webp 2400w" width="2400" height="1350" data-slot="devis/entete" class="is-provisoire" sizes="100vw" alt="" fetchpriority="high">
     </picture>
   </div>
   <div class="wrap devis-hero__in">
@@ -75,11 +77,11 @@
     <p class="demo-note" role="note"><span class="todo" data-i18n="dv.demo">démonstration</span><span data-i18n="dv.demotxt">Ce formulaire est une maquette : rien n'est envoyé. Sur le site final, la demande arrivera à kr@swiss-cloisons-solutions.com.</span></p>
     <p class="demo-note" role="status" data-draft hidden style="margin-top:10px"><span data-i18n="dv.brouillon">Brouillon retrouvé sur cet appareil.</span> <button class="copy" type="button" data-draft-clear data-i18n="dv.effacer">Effacer</button></p>
     <ol class="etapes" aria-label="Étapes du formulaire" style="margin-top:28px">
-      <li class="is-current"><span data-i18n="dv.s1">Travaux</span></li>
-      <li><span data-i18n="dv.s2">Précisions</span></li>
-      <li><span data-i18n="dv.s3">Lieu</span></li>
-      <li><span data-i18n="dv.s4">Coordonnées</span></li>
-      <li><span data-i18n="dv.s5">Récapitulatif</span></li>
+      <li class="is-current"><button type="button" data-goto="0" disabled><span data-i18n="dv.s1">Travaux</span></button></li>
+      <li><button type="button" data-goto="1" disabled><span data-i18n="dv.s2">Précisions</span></button></li>
+      <li><button type="button" data-goto="2" disabled><span data-i18n="dv.s3">Lieu</span></button></li>
+      <li><button type="button" data-goto="3" disabled><span data-i18n="dv.s4">Coordonnées</span></button></li>
+      <li><button type="button" data-goto="4" disabled><span data-i18n="dv.s5">Récapitulatif</span></button></li>
     </ol>
 
     <form id="devis-form" novalidate>

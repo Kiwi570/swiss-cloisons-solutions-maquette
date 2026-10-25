@@ -156,6 +156,9 @@
 
   /* ---------- En-tête : se cache en descendant, change de teinte sur fond sombre */
   var hd = d.querySelector('[data-hd]');
+  var dock = d.querySelector('[data-dock]');
+  var foot = d.querySelector('.ft');
+  var ctaSec = d.getElementById('contact');
   var themed = Array.prototype.slice.call(d.querySelectorAll('[data-hd-theme]'));
   var lastY = window.scrollY, ticking = false;
   function onScroll() {
@@ -169,6 +172,12 @@
         if (r.top <= probe && r.bottom > probe) { dark = themed[i].getAttribute('data-hd-theme') === 'dark'; }
       }
       hd.classList.toggle('is-dark', dark);
+    }
+    if (dock) {
+      var vh = window.innerHeight, hide = false;
+      if (foot && foot.getBoundingClientRect().top < vh) hide = true;
+      if (ctaSec) { var rc = ctaSec.getBoundingClientRect(); if (rc.top < vh * 0.55 && rc.bottom > 0) hide = true; }
+      dock.classList.toggle('is-on', y > vh * 0.6 && !hide && !menuOpen);
     }
     lastY = y;
     ticking = false;
@@ -292,6 +301,21 @@
       gsap.fromTo(el, { x: 0 }, { x: function () { return -(el.scrollWidth - window.innerWidth) * 0.9; }, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true } });
     });
     window.addEventListener('load', function () { ST.refresh(); });
+  });
+
+  /* ---------- Section en cours dans la navigation (créé après les épinglages des pages) */
+  SCS.boot.then(function () {
+    setTimeout(function () {
+      if (!ST) return;
+      d.querySelectorAll('.hd__nav a[href^="#"]').forEach(function (a) {
+        var sec = d.getElementById(a.getAttribute('href').slice(1));
+        if (!sec) return;
+        ST.create({ trigger: sec, start: 'top 45%', end: 'bottom 45%', onToggle: function (st) {
+          a.classList.toggle('is-active', st.isActive);
+          if (st.isActive) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+        } });
+      });
+    }, 0);
   });
 
   if (calm) {

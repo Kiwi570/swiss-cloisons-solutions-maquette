@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page introuvable · Swiss Cloisons Solutions</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3F2EE">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>(function(){var d=document.documentElement;d.classList.add('js');var l='fr';try{l=localStorage.getItem('scs-lang')||'fr'}catch(e){}if(l==='en'){d.lang='en';d.classList.add('lang-en')}})();</script>
+</head>
+<body data-page="404">
+<main class="wrap p404">
+  <div class="p404__pane" aria-hidden="true"></div>
+  <a class="hd__logo" href="/" aria-label="Swiss Cloisons Solutions, accueil" style="position:absolute;top:28px;left:max(var(--gut),var(--pad))">
+    <svg class="mark" viewBox="-40 -40 1250 1530" aria-hidden="true"><path d="M135 1430H10V600L585 95l575 505v840L487 840V0"/></svg>
+    <span class="hd__name"><b>Swiss Cloisons</b><b>Solutions</b></span>
+  </a>
+  <p class="eyebrow" data-l="fr">Page introuvable</p>
+  <p class="eyebrow" data-l="en" hidden>Page not found</p>
+  <p class="p404__num">404</p>
+  <h1 class="h2" data-l="fr">Cette pièce <span class="serif">n'a pas encore été cloisonnée.</span></h1>
+  <h1 class="h2" data-l="en" hidden>This room <span class="serif">has not been partitioned yet.</span></h1>
+  <p class="lead" data-l="fr">La page demandée n'existe pas ou a changé d'adresse.</p>
+  <p class="lead" data-l="en" hidden>The page you asked for does not exist or has moved.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px">
+    <a class="btn" href="/"><span data-l="fr">Retour à l'accueil</span><span data-l="en" hidden>Back to home</span></a>
+    <a class="btn btn--ghost" href="/devis"><span data-l="fr">Demander un devis</span><span data-l="en" hidden>Request a quote</span></a>
+  </div>
+</main>
+<script>
+  if (document.documentElement.classList.contains('lang-en')) {
+    document.querySelectorAll('[data-l]').forEach(function (el) { el.hidden = el.getAttribute('data-l') !== 'en'; });
+    document.title = 'Page not found · Swiss Cloisons Solutions';
+  }
+</script>
+</body>
+</html>
