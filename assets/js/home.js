@@ -137,7 +137,8 @@
     mm.add('(min-width: 761px)', function () {
       var sec = track.closest('.reals'); if (sec) sec.classList.add('is-h');
       var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
-      var tw = gsap.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '.reals__pin', start: 'top 14%', end: function () { return '+=' + dist(); }, pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1, onUpdate: function (st) { prog(st.progress); } } });
+      // la piste tient dans l'écran : en-tête réservé en CSS (--entete-h), épinglage au ras du haut
+      var tw = gsap.to(track, { x: function () { return -dist(); }, ease: 'none', scrollTrigger: { trigger: '.reals__pin', start: 'top top', end: function () { return '+=' + dist(); }, pin: true, scrub: 0.8, invalidateOnRefresh: true, onUpdate: function (st) { prog(st.progress); } } });
       track.querySelectorAll('.card').forEach(function (card) {
         var img = card.querySelector('img');
         gsap.set(img, { scale: 1.18 });
@@ -158,12 +159,15 @@
     var panels = stage.querySelectorAll('.panneau');
     var rail = stage.querySelector('.rail');
     mm.add('(min-width: 961px)', function () {
-      var tl = gsap.timeline({ scrollTrigger: { trigger: stage, start: 'top 22%', end: '+=130%', pin: '.methode', scrub: 0.7, anticipatePin: 1 } });
+      // toute la section (titre compris) tient dans l'écran, sous l'en-tête réel (--entete-h)
+      var sec = stage.closest('.methode'); if (sec) sec.classList.add('is-pin');
+      var tl = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top top', end: '+=130%', pin: true, scrub: 0.7, invalidateOnRefresh: true } });
       tl.fromTo(rail, { '--k': 0 }, { '--k': 1, duration: 0.6, ease: 'none' });
       panels.forEach(function (p, i) {
         tl.fromTo(p, { xPercent: 130 + (4 - i) * 30, opacity: 0, rotateY: -18 }, { xPercent: 0, opacity: 1, rotateY: 0, duration: 1, ease: 'power3.out', transformPerspective: 1200 }, 0.1 + i * 0.6)
           .call(function () { if (sound()) sound().tink(0.9 + i * 0.05); }, null, 1.05 + i * 0.6);
       });
+      return function () { if (sec) sec.classList.remove('is-pin'); };
     });
     mm.add('(max-width: 960px)', function () {
       gsap.fromTo(rail, { '--k': 0 }, { '--k': 1, duration: 1.2, ease: 'expo.inOut', scrollTrigger: { trigger: rail, start: 'top 85%', toggleActions: 'play none none none' } });

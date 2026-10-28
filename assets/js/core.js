@@ -165,6 +165,19 @@
   var ctaSec = d.getElementById('contact');
   var themed = Array.prototype.slice.call(d.querySelectorAll('[data-hd-theme]'));
   var lastY = window.scrollY, ticking = false;
+  /* hauteurs réelles de l'en-tête et de la barre du bas, pour les épinglages et le dernier bloc */
+  function mesure() {
+    if (hd) html.style.setProperty('--entete-h', Math.ceil(hd.offsetHeight + (parseFloat(getComputedStyle(hd).top) || 0)) + 'px');
+    html.style.setProperty('--barres-h', (dock ? Math.ceil(dock.offsetHeight) : 0) + 'px');
+  }
+  mesure();
+  if (window.ResizeObserver) { var roH = new ResizeObserver(mesure); if (hd) roH.observe(hd); if (dock) roH.observe(dock); }
+  window.addEventListener('resize', mesure);
+  /* la barre du bas n'apparaît qu'une fois le héros dépassé */
+  var heroSec = d.querySelector('.hero, .fiche-hero, .legal-hero'), heroVu = !!heroSec;
+  if (heroSec && window.IntersectionObserver) {
+    new IntersectionObserver(function (en) { heroVu = en[0].isIntersecting; onScroll(); }).observe(heroSec);
+  }
   function onScroll() {
     var y = window.scrollY;
     if (hd) {
@@ -181,7 +194,8 @@
       var vh = window.innerHeight, hide = false;
       if (foot && foot.getBoundingClientRect().top < vh) hide = true;
       if (ctaSec) { var rc = ctaSec.getBoundingClientRect(); if (rc.top < vh * 0.55 && rc.bottom > 0) hide = true; }
-      dock.classList.toggle('is-on', y > vh * 0.6 && !hide && !menuOpen);
+      if (heroSec && !window.IntersectionObserver) heroVu = heroSec.getBoundingClientRect().bottom > 0;
+      dock.classList.toggle('is-on', !heroVu && !hide && !menuOpen);
     }
     lastY = y;
     ticking = false;
